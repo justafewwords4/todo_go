@@ -66,13 +66,13 @@ func main() {
 		// agregar la nueva tarea
 		// si se pasan argumentos, estos deben ser
 		// usados como la nueva tarea
-		t, err := getTask(os.Stdin, flag.Args()...)
+		tasks, err := getTask(os.Stdin, flag.Args()...)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
 
-		l.Add(t)
+		l.Add(tasks)
 		// salvar la nueva lista
 		if err := l.Save(todoFileName); err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -97,20 +97,24 @@ func main() {
 
 // la función getTask decide de donde tomar la descripción
 // para una nueva tarea ya sea desde STDIN o desde args
-func getTask(r io.Reader, args ...string) (string, error) {
+func getTask(r io.Reader, args ...string) ([]string, error) {
+	// tomar la tarea desde args
+
+	myList := []string{}
 	if len(args) > 0 {
-		return strings.Join(args, " "), nil
+		myList = append(myList, strings.Join(args, " "))
+		return myList, nil
 	}
 
+	// tomar la(s) tarea(s) desde STDIN
 	s := bufio.NewScanner(r)
-	s.Scan()
+	for s.Scan() {
+		myList = append(myList, s.Text())
+	}
+
 	if err := s.Err(); err != nil {
-		return "", err
+		return myList, err
 	}
 
-	if len(s.Text()) == 0 {
-		return "", fmt.Errorf("Task cannot be blank")
-	}
-
-	return s.Text(), nil
+	return myList, nil
 }

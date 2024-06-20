@@ -22,15 +22,16 @@ type item struct {
 type List []item
 
 // Add agrega una tarea a List
-func (l *List) Add(task string) {
-	t := item{
-		Task:        task,
-		Done:        false,
-		CreatedAt:   time.Now(),
-		CompletedAt: time.Time{},
+func (l *List) Add(tasks []string) {
+	for _, task := range tasks {
+		t := item{
+			Task:        task,
+			Done:        false,
+			CreatedAt:   time.Now(),
+			CompletedAt: time.Time{},
+		}
+		*l = append(*l, t)
 	}
-
-	*l = append(*l, t)
 }
 
 // Complete mark a ToDo item as completed

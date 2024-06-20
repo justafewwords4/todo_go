@@ -43,4 +43,4 @@ echo 'export TODO_FILENAME="$HOME/.todo.json"' >> ~/.zshrc
 - [x] Actualizar la función de ayuda personalizada.
 - [ ] Incluir nuevas funciones de prueba para las nuevas banderas
 - [ ] Actualizar las pruebas para usar la variable `TODO_FILENAME`.
-- [ ] Actualizar la función `getTask` para aceptar varias líneas. Cada línea representa una tarea
+- [x] Actualizar la función `getTask` para aceptar varias líneas. Cada línea representa una tarea
