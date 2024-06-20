@@ -18,6 +18,9 @@ func main() {
 		fmt.Fprintf(flag.CommandLine.Output(), "%s tool. Developed for The Pragmatic Bookshelf\n", os.Args[0])
 		fmt.Fprintf(flag.CommandLine.Output(), "Copyright 2020\n")
 		fmt.Fprintf(flag.CommandLine.Output(), "\nUsage information\n")
+		fmt.Fprintf(flag.CommandLine.Output(), "\nPuede exportar la variable TODO_FILENAME para usar ")
+		fmt.Fprintf(flag.CommandLine.Output(), "\nun archivo de tareas predeterminado. Ejemplo:")
+		fmt.Fprintf(flag.CommandLine.Output(), "\necho export TODO_FILENAME='$HOME/.todo.json' >> ~/.zshrc\n")
 		flag.PrintDefaults()
 		fmt.Fprintln(flag.CommandLine.Output(), "")
 	}
