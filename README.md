@@ -1,5 +1,9 @@
 # todo_go
 
+## Créditos
+
+Esta app está tomada del libro [Powerful Command-Line Applications in Go: Build Fast and Maintainable Tools](https://www.amazon.com/Powerful-Command-Line-Applications-Go-Maintainable/dp/168050696X/ref=sr_1_1?crid=3O97DMOC5QT0G&dib=eyJ2IjoiMSJ9.90NbTbDoXat4PCeuMqFQZxCXbZ4omIBwUp-R5JoECkTGjHj071QN20LucGBJIEps.Bflz_XUQbegnNyMc9xwGQ-AnoJXaN4B6tuabu9uLD5o&dib_tag=se&keywords=powerful+command+line+applications+in+go&qid=1718922396&sprefix=powerfull+command+line+applications+in+go%2Caps%2C189&sr=8-1).
+
 ## API de la app
 
 - _item_: Representa un item todo. Se va a implementar usando struct.
