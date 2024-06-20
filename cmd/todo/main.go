@@ -1,15 +1,17 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"fmt"
 	"github.com/justafewwords4/todo_go"
+	"io"
 	"os"
-	// "strings"
+	"strings"
 )
 
 // hardcoding el nombre de archivo a usar
-const todoFileName = ".todo.json"
+var todoFileName = ".todo.json"
 
 func main() {
 	flag.Usage = func() {
@@ -20,11 +22,16 @@ func main() {
 		fmt.Fprintln(flag.CommandLine.Output(), "")
 	}
 	// parsing command line flags
-	task := flag.String("t", "", "Task to be included in the ToDo list")
+	add := flag.Bool("a", false, "Add task to the ToDo list")
 	list := flag.Bool("l", false, "List all tasks")
 	complete := flag.Int("c", 0, "Item to be completed")
 
 	flag.Parse()
+
+	// verificar si el usuario ha definido alguna variable de ambiente para el archivo .todo.json
+	if os.Getenv("TODO_FILENAME") != "" {
+		todoFileName = os.Getenv("TODO_FILENAME")
+	}
 
 	// define an item list
 	l := &todo.List{}
@@ -51,9 +58,17 @@ func main() {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
-	case *task != "":
+	case *add:
 		// agregar la nueva tarea
-		l.Add(*task)
+		// si se pasan argumentos, estos deben ser
+		// usados como la nueva tarea
+		t, err := getTask(os.Stdin, flag.Args()...)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+
+		l.Add(t)
 		// salvar la nueva lista
 		if err := l.Save(todoFileName); err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -64,4 +79,24 @@ func main() {
 		fmt.Fprintln(os.Stderr, "Invalid option")
 		os.Exit(1)
 	}
+}
+
+// la función getTask decide de donde tomar la descripción
+// para una nueva tarea ya sea desde STDIN o desde args
+func getTask(r io.Reader, args ...string) (string, error) {
+	if len(args) > 0 {
+		return strings.Join(args, " "), nil
+	}
+
+	s := bufio.NewScanner(r)
+	s.Scan()
+	if err := s.Err(); err != nil {
+		return "", err
+	}
+
+	if len(s.Text()) == 0 {
+		return "", fmt.Errorf("Task cannot be blank")
+	}
+
+	return s.Text(), nil
 }

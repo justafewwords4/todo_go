@@ -17,3 +17,16 @@
 
 - Cuando se ejecute sin argumentos, se listan todos los elementos
 - Al ejecutarse con dos argumentos, se concatenan y se agrega a la lista como un nuevo item
+
+## TODO_FILENAME
+
+Por default, `todo_go` utiliza el archivo `.todo.json` para almacenar las tareas, pero en el directorio donde se ejecuta el comando, por lo que al final vamos a tener un montón de archivos con diversas tareas, y seguramente no es eso lo que queremos.
+
+Para tener un archivo fijo, hay que exportar la variable `TODO_FILENAME` en el archivo `.bashrc`, o `.zshrc`, dependiendo del shell que se utilice.
+
+```sh
+# para bash
+echo 'export TODO_FILENAME="$HOME/.todo.json"' >> ~/.bashrc
+# para zsh
+echo 'export TODO_FILENAME="$HOME/.todo.json"' >> ~/.zshrc
+```
