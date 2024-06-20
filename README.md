@@ -25,8 +25,18 @@ Por default, `todo_go` utiliza el archivo `.todo.json` para almacenar las tareas
 Para tener un archivo fijo, hay que exportar la variable `TODO_FILENAME` en el archivo `.bashrc`, o `.zshrc`, dependiendo del shell que se utilice.
 
 ```sh
-# para bash
+# bash
 echo 'export TODO_FILENAME="$HOME/.todo.json"' >> ~/.bashrc
-# para zsh
+# zsh
 echo 'export TODO_FILENAME="$HOME/.todo.json"' >> ~/.zshrc
 ```
+
+## TODO
+
+- [x] Agregar bandera `-d` para eliminar tareas
+- [ ] Agregar bandera `-v` para modo `verbose`, mostrando fecha de creación, etc.
+- [ ] Agregar bandera `-t` para modo `tiny`, para que no muestre tareas completadas
+- [ ] Actualizar la función de ayuda personalizada.
+- [ ] Incluir nuevas funciones de prueba para las nuevas banderas
+- [ ] Actualizar las pruebas para usar la variable `TODO_FILENAME`.
+- [ ] Actualizar la función `getTask` para aceptar varias líneas. Cada línea representa una tarea
