@@ -39,11 +39,7 @@ func main() {
 	switch {
 	case *list:
 		// listar los items en el archivo todo
-		for _, item := range *l {
-			if !item.Done {
-				fmt.Println(item.Task)
-			}
-		}
+		fmt.Print(l)
 	case *complete > 0:
 		// completar el item dado
 		if err := l.Complete(*complete); err != nil {
