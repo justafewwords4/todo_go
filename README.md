@@ -38,7 +38,7 @@ echo 'export TODO_FILENAME="$HOME/.todo.json"' >> ~/.zshrc
 ## TODO
 
 - [x] Agregar bandera `-d` para eliminar tareas
-- [ ] Agregar bandera `-v` para modo `verbose`, mostrando fecha de creación, etc.
+- [x] Agregar bandera `-v` para modo `verbose`, mostrando fecha de creación, etc.
 - [x] Agregar bandera `-x`, para que no muestre tareas completadas
 - [x] Actualizar la función de ayuda personalizada.
 - [ ] Incluir nuevas funciones de prueba para las nuevas banderas

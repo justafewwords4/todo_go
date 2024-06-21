@@ -30,6 +30,7 @@ func main() {
 	complete := flag.Int("c", 0, "Item to be completed")
 	delete := flag.Int("d", 0, "Item to be deleted")
 	noShowComplete := flag.Bool("x", false, "No show completed tasks")
+	verbose := flag.Bool("v", false, "Verbose mode")
 
 	flag.Parse()
 
@@ -52,6 +53,7 @@ func main() {
 	case *list:
 		// listar los items en el archivo todo
 		todo.NoShowDone = *noShowComplete
+		todo.Verbose = *verbose
 		fmt.Print(l)
 	case *complete > 0:
 		// completar el item dado

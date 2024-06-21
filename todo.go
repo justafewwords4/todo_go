@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+
 	// "go/types"
 	"os"
 	"time"
@@ -19,6 +20,7 @@ type item struct {
 }
 
 var NoShowDone = false
+var Verbose = false
 
 // List represents a list of ToDo items
 type List []item
@@ -102,7 +104,13 @@ func (l *List) String() string {
 			prefix = "X"
 		}
 
-		formatted += fmt.Sprintf("[%s] %d: %s\n", prefix, k+1, t.Task)
+		moreInfo := ""
+		if Verbose {
+			duration := time.Since(t.CreatedAt)
+			moreInfo = fmt.Sprintf("%.2fhrs ago,", duration.Hours())
+		}
+
+		formatted += fmt.Sprintf("[%s] %s %d: %s\n", prefix, moreInfo, k+1, t.Task)
 		//ajustar el número del item mediante k para imprimir en base 1, y no base 0
 	}
 
