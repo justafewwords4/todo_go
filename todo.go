@@ -18,6 +18,8 @@ type item struct {
 	CompletedAt time.Time
 }
 
+var NoShowDone = false
+
 // List represents a list of ToDo items
 type List []item
 
@@ -94,10 +96,14 @@ func (l *List) String() string {
 	for k, t := range *l {
 		prefix := " "
 		if t.Done {
+			if NoShowDone {
+				continue
+			}
 			prefix = "X"
 		}
-		//ajustar el número del item mediante k para imprimir en base 1, y no base 0
+
 		formatted += fmt.Sprintf("[%s] %d: %s\n", prefix, k+1, t.Task)
+		//ajustar el número del item mediante k para imprimir en base 1, y no base 0
 	}
 
 	return formatted
